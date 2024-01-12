@@ -11,9 +11,6 @@ const PostContentContainer = ({
 }) => {
 	const navigate = useNavigate();
 
-	useConsoleLog();
-	useWindowSize();
-
 	return (
 		<div className={className}>
 			<img src={imageUrl} alt={title} />

@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 
 import { Pagination, PostCard, Search } from './components';
 import { PAGINATION_LIMIT } from '../../constants';
-import { debounce, getLastPageFromLinks } from './utils';
+import { debounce } from './utils';
 import { request } from '../../utils/request';
 import { styled } from 'styled-components';
 

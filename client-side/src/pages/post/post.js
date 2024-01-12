@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useMatch } from 'react-router-dom';
 import { Comments, PostContent, PostForm } from './components';
@@ -31,7 +30,6 @@ const PostContainer = ({ className }) => {
 		}
 
 		dispatch(loadPostAsync(params.id)).then((postData) => {
-			console.log(postData);
 			setError(postData.error);
 			setIsLoading(false);
 		});

@@ -1,6 +1,6 @@
 import { ROLE } from '../../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUserRole, selectUserLogin, selectUserSession } from '../../../../selectors';
+import { selectUserRole, selectUserLogin } from '../../../../selectors';
 import { Icon, Button } from '../../../../components';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../../../actions';
@@ -25,12 +25,16 @@ const ControlPanelContainer = (className) => {
 	const roleId = useSelector(selectUserRole);
 	const login = useSelector(selectUserLogin);
 
+	console.log('roleID: ', roleId);
+
 	const onLogout = () => {
 		dispatch(logout());
 		sessionStorage.removeItem('userData');
 	};
 
 	const isAdmin = checkAccess([ROLE.ADMIN], roleId);
+
+	console.log('is admin: ', isAdmin);
 
 	return (
 		<div className={className}>
@@ -41,7 +45,8 @@ const ControlPanelContainer = (className) => {
 					</Button>
 				) : (
 					<>
-						<UserName>Hello, {login} !</UserName>
+						<UserName>Hello, {login} </UserName>
+						{/* <button>bitton to check</button> */}
 						<Icon id="fa-sign-out" margin="0 0 0 10px" onClick={onLogout} />
 					</>
 				)}
