@@ -19,6 +19,8 @@ const PostContainer = ({ className }) => {
 	const params = useParams();
 	const post = useSelector(selectPost);
 
+	console.log('post: ', post, typeof post);
+
 	useLayoutEffect(() => {
 		dispatch(RESET_POST_DATA);
 	}, [dispatch, isCreating]);

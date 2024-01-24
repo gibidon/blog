@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 
+import { usePostData } from '../../hooks';
+
 import { Pagination, PostCard, Search } from './components';
 import { PAGINATION_LIMIT } from '../../constants';
 import { debounce } from './utils';
@@ -7,20 +9,22 @@ import { request } from '../../utils/request';
 import { styled } from 'styled-components';
 
 export const MainContainer = ({ className }) => {
-	const [posts, setPosts] = useState([]);
+	// const [posts, setPosts] = useState([]);
 	const [page, setPage] = useState(1);
-	const [lastPage, setLastPage] = useState(1);
+	// const [lastPage, setLastPage] = useState(1);
 	const [shouldSearch, setShouldSearch] = useState(false);
 	const [searchPhrase, setSearchPhrase] = useState('');
 
-	useEffect(() => {
-		request(`/posts?search=${searchPhrase}&page=${page}&limit=${PAGINATION_LIMIT}`).then(
-			({ data: { posts, lastPage } }) => {
-				setPosts(posts);
-				setLastPage(lastPage);
-			},
-		);
-	}, [page, shouldSearch, searchPhrase]);
+	const [posts, lastPage] = usePostData(searchPhrase, page, PAGINATION_LIMIT);
+	console.log('posts: ', posts);
+	// useEffect(() => {
+	// 	request(`/posts?search=${searchPhrase}&page=${page}&limit=${PAGINATION_LIMIT}`).then(
+	// 		({ data: { posts, lastPage } }) => {
+	// 			setPosts(posts);
+	// 			setLastPage(lastPage);
+	// 		},
+	// 	);
+	// }, [page, shouldSearch, searchPhrase]);
 
 	const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 2000), []);
 	//debounce return func that can accept args,in our case !shouldSearch
